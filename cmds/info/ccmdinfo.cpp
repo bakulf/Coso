@@ -31,23 +31,22 @@ int CCmdInfo::run()
     const CContext *context = m_application->globalContext();
     if (context) {
         std::cout << "Global Context" << std::endl;
-
-        foreach(const CTask *task, context->tasks()) {
-            std::cout << "\tTask: " << qPrintable(task->name()) << std::endl;
-            std::cout << "\t\tType: " << qPrintable(task->type()) << std::endl;
-            std::cout << "\t\tDescription: " << qPrintable(task->info()) << std::endl;
-        }
+        runContext(context);
     }
 
     foreach(const CContext *context, m_application->contexts()) {
         std::cout << "Context: " << qPrintable(context->name()) << std::endl;
-
-        foreach(const CTask *task, context->tasks()) {
-            std::cout << "\tTask: " << qPrintable(task->name()) << std::endl;
-            std::cout << "\t\tType: " << qPrintable(task->type()) << std::endl;
-            std::cout << "\t\tDescription: " << qPrintable(task->info()) << std::endl;
-        }
+        runContext(context);
     }
 
     return 0;
+}
+
+void CCmdInfo::runContext(const CContext *context) const
+{
+    foreach(const CTask *task, context->tasks()) {
+        std::cout << "\tTask: " << qPrintable(task->name()) << std::endl;
+        std::cout << "\t\tType: " << qPrintable(task->type()) << std::endl;
+        std::cout << "\t\tDescription: " << qPrintable(task->info()) << std::endl;
+    }
 }

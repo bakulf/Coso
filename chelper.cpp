@@ -2,22 +2,26 @@
 
 #include "ccmdswitch.h"
 #include "ccmdinfo.h"
+#include "ccmdnew.h"
 #include "ccmdhelp.h"
 
-#include "ctaskfile.h"
+#include "ctaskeditfile.h"
+#include "ctaskremovefile.h"
 
 // List of the commands:
 CCmdHelper CCmdHelpers[] = {
-    { "switch [contextName]", "change context", CCmdSwitch::helper  },
-    { "info",                 "show the configuration of the contexts", CCmdInfo::helper  },
+    { "switch|sw [contextName] <--verbose|-v>", "change context",                         CCmdSwitch::helper  },
+    { "info|i",                                 "show the configuration of the contexts", CCmdInfo::helper    },
+    { "new|n <options>",                        "create a new context or a task",         CCmdNew::helper     },
 
     // The letest helper:
-    { "help",                 "this help", CCmdHelp::helper    },
-    { 0,                      0,           0                   }
+    { "help",                                   "this help",                              CCmdHelp::helper    },
+    { 0,                                        0,                                        0                   }
 };
 
 // List of the tasks types:
 CTaskHelper CTaskHelpers[] = {
-    { "file", CTaskFile::helper },
-    { 0,      0 }
+    { "editFile",   "Edit a file (you must create a template)", CTaskEditFile::helper,   CTaskEditFile::generator   },
+    { "removeFile", "Remove a file",                            CTaskRemoveFile::helper, CTaskRemoveFile::generator },
+    { 0,            0,                                          0,                       0                          }
 };

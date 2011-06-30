@@ -7,6 +7,7 @@ class CContext;
 class CApplication;
 
 class QString;
+class QFileInfo;
 class QStringList;
 class QDomElement;
 
@@ -25,7 +26,13 @@ extern CCmdHelper CCmdHelpers[];
 // Just a struct for the task types
 struct CTaskHelper {
     const char *type;
-    CTask *(*helper) (CContext *context, const QString &name, const QDomElement &root);
+    const char *description;
+
+    CTask *(*helper) (CContext *context,
+                      const QString &name,
+                      const QDomElement &root);
+
+    bool (*generator) (const QFileInfo &file);
 };
 
 extern CTaskHelper CTaskHelpers[];

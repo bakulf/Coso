@@ -1,0 +1,12 @@
+Makefile
+Makefile.*
+.obj
+.moc
+core
+moc_*
+core.*
+*.so
+*.so.*
+*.a
+*.o
+coso

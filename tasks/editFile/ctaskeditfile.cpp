@@ -1,33 +1,38 @@
-#include "ctaskfile.h"
+#include "ctaskeditfile.h"
 
 #include "ccontext.h"
 #include "constants.h"
 
 #include <iostream>
 
-CTask *CTaskFile::helper(CContext *context, const QString &name, const QDomElement &root)
+CTask *CTaskEditFile::helper(CContext *context, const QString &name, const QDomElement &root)
 {
-    QDomElement fileInput = root.firstChildElement(C_TASK_FILEINPUT_TAG);
+    QDomElement fileInput = root.firstChildElement(C_TASK_EDITFILE_INPUT_TAG);
     if (fileInput.isNull()) {
-        std::cerr << "WARNING: No file for the task '"
+        std::cerr << "WARNING: No input file for the task '"
                   << qPrintable(name)
                   << "`." << std::endl;
         return 0;
     }
 
-    QDomElement fileOutput = root.firstChildElement(C_TASK_FILEOUTPUT_TAG);
+    QDomElement fileOutput = root.firstChildElement(C_TASK_EDITFILE_OUTPUT_TAG);
     if (fileOutput.isNull()) {
-        std::cerr << "WARNING: No file for the task '"
+        std::cerr << "WARNING: No output file for the task '"
                   << qPrintable(name)
                   << "`." << std::endl;
         return 0;
     }
 
-    return new CTaskFile(context, name, fileInput.text(), fileOutput.text());
+    return new CTaskEditFile(context, name, fileInput.text(), fileOutput.text());
 }
 
-CTaskFile::CTaskFile(CContext *context, const QString &name, const QString &fileInput, const QString &fileOutput) :
-    CTask(context, name, C_TASK_FILE_NAME),
+bool CTaskEditFile::generator(const QFileInfo &file)
+{
+    return CTask::generator(file, C_TASK_EDITFILE_TEMPLATE);
+}
+
+CTaskEditFile::CTaskEditFile(CContext *context, const QString &name, const QString &fileInput, const QString &fileOutput) :
+    CTask(context, name, C_TASK_EDITFILE_NAME),
     m_fileInput(fileInput),
     m_fileOutput(fileOutput),
     m_prevValue(true),
@@ -35,28 +40,32 @@ CTaskFile::CTaskFile(CContext *context, const QString &name, const QString &file
 {
 }
 
-CTaskFile::~CTaskFile()
+CTaskEditFile::~CTaskEditFile()
 {
 }
 
-const QString CTaskFile::info() const
+const QString CTaskEditFile::info() const
 {
     return QString("Transform the file %1 in %2.").arg(m_fileInput).arg(m_fileOutput);
 }
 
 
-int CTaskFile::run(const QString &context)
+int CTaskEditFile::run(const QString &context)
 {
     QFile input(m_fileInput);
     QFile output(m_fileOutput);
 
     if (!input.open(QIODevice::ReadOnly)) {
-        std::cerr << "WARNING: Error opening the file '" << qPrintable(m_fileInput) << "\"." << std::endl;
+        std::cerr << "WARNING: Error opening the file '"
+                  << qPrintable(m_fileInput)
+                  << "\"." << std::endl;
         return 1;
     }
 
     if (!output.open(QIODevice::WriteOnly)) {
-        std::cerr << "WARNING: Error opening the file '" << qPrintable(m_fileOutput) << "\"." << std::endl;
+        std::cerr << "WARNING: Error opening the file '"
+                  << qPrintable(m_fileOutput)
+                  << "\"." << std::endl;
         return 1;
     }
 
@@ -86,7 +95,9 @@ int CTaskFile::run(const QString &context)
         for (qint64 done = 0; done < size;) {
             qint64 ret = output.write(buffer + done);
             if (ret <= 0) {
-                std::cerr << "WARNING: Error writing in the file '" << qPrintable(m_fileOutput) << "\"." << std::endl;
+                std::cerr << "WARNING: Error writing in the file '"
+                          << qPrintable(m_fileOutput)
+                          << "\"." << std::endl;
                 break;
             }
 
@@ -99,23 +110,25 @@ int CTaskFile::run(const QString &context)
     return 0;
 }
 
-bool CTaskFile::checkLine(const char *buffer, qint64 size, const QString &context)
+bool CTaskEditFile::checkLine(const char *buffer, qint64 size, const QString &context)
 {
     QByteArray line(buffer, size);
 
-    if (line.startsWith(C_TASK_FILE_TOKEN_START)) {
+    if (line.startsWith(C_TASK_EDITFILE_TOKEN_START)) {
         if (m_in) {
             std::cerr << "WARNING: this line breaks the parser (No nested blocks!): '"
-                      << qPrintable(QString(QByteArray(buffer, size))) << "`." << std::endl;
+                      << qPrintable(QString(QByteArray(buffer, size)))
+                      << "`." << std::endl;
             return false;
         }
 
-        line.remove(0, strlen(C_TASK_FILE_TOKEN_START));
+        line.remove(0, strlen(C_TASK_EDITFILE_TOKEN_START));
         line = line.trimmed();
 
         if (line.isEmpty()) {
             std::cerr << "WARNING: this line breaks the parser: '"
-                      << qPrintable(QString(QByteArray(buffer, size))) << "`." << std::endl;
+                      << qPrintable(QString(QByteArray(buffer, size)))
+                      << "`." << std::endl;
             return false;
         }
 
@@ -124,10 +137,11 @@ bool CTaskFile::checkLine(const char *buffer, qint64 size, const QString &contex
         return false;
     }
 
-    if(line.startsWith(C_TASK_FILE_TOKEN_END)) {
+    if(line.startsWith(C_TASK_EDITFILE_TOKEN_END)) {
         if (!m_in) {
             std::cerr << "WARNING: this line breaks the parser (End without Start?!?): '"
-                      << qPrintable(QString(QByteArray(buffer, size))) << "`." << std::endl;
+                      << qPrintable(QString(QByteArray(buffer, size)))
+                      << "`." << std::endl;
             return false;
         }
 
@@ -135,6 +149,6 @@ bool CTaskFile::checkLine(const char *buffer, qint64 size, const QString &contex
         m_in = false;
         return false;
     }
-    
+
     return m_prevValue;
 }

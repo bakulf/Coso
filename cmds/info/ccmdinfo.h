@@ -3,6 +3,7 @@
 
 #include "ccmd.h"
 
+class CContext;
 class CApplication;
 
 // Info the context
@@ -16,6 +17,9 @@ public:
 
 public:
     int run();
+
+private:
+    void runContext(const CContext *context) const;
 
 private:
     CApplication *m_application;

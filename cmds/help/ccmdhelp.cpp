@@ -35,7 +35,7 @@ int CCmdHelp::run()
     {
         std::cerr << " . " << CCmdHelpers[i].name;
 
-        for (int s = strlen(CCmdHelpers[i].name); s < 30; s++)
+        for (int s = strlen(CCmdHelpers[i].name); s < 40; s++)
             std::cerr << ' ';
 
         std::cerr << CCmdHelpers[i].description << std::endl;

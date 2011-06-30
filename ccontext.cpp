@@ -43,7 +43,7 @@ void CContext::readTask(const QFileInfo &file)
        fd.close();
        return;
     }
- 
+
     fd.close();
 
     QDomElement root = doc.documentElement();
@@ -64,13 +64,23 @@ void CContext::readTask(const QFileInfo &file)
         return;
     }
 
+    bool found(false);
     QString type = child.text();
     for(int i = 0; CTaskHelpers[i].type; i++)
     {
         if (type == CTaskHelpers[i].type) {
+            found = true;
+
             CTask *task(CTaskHelpers[i].helper(this, file.fileName(), root));
             if (task)
                 m_tasks << task;
         }
+    }
+
+    if (found == false) {
+        std::cerr << "WARNING: Type '" << qPrintable(type)
+                  << "` doesn't exist for the file '"
+                  << qPrintable(file.absoluteFilePath())
+                  << "`." << std::endl;
     }
 }

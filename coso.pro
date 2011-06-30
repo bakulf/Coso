@@ -12,24 +12,30 @@ QMAKE_CXXFLAGS *= -Werror
 INCLUDEPATH += cmds        \
                cmds/switch \
                cmds/help   \
+               cmds/new    \
                cmds/info
 
-INCLUDEPATH += tasks      \
-               tasks/file
+INCLUDEPATH += tasks            \
+               tasks/editFile   \
+               tasks/removeFile
 
 DEPENDPATH  += $${INCLUDEPATH}
 
 CMDS_HEADERS = ccmdhelp.h   \
                ccmdswitch.h \
+               ccmdnew.h    \
                ccmdinfo.h
 
 CMDS_SOURCES = ccmdhelp.cpp   \
                ccmdswitch.cpp \
+               ccmdnew.cpp    \
                ccmdinfo.cpp
 
-TASKS_HEADERS = ctaskfile.h
+TASKS_HEADERS = ctaskeditfile.h   \
+                ctaskremovefile.h
 
-TASKS_SOURCES = ctaskfile.cpp
+TASKS_SOURCES = ctaskeditfile.cpp   \
+                ctaskremovefile.cpp
 
 HEADERS = constants.h       \
           capplication.h    \
@@ -43,6 +49,7 @@ HEADERS = constants.h       \
 SOURCES = main.cpp          \
           capplication.cpp  \
           ccontext.cpp      \
+          ctask.cpp         \
           chelper.cpp       \
           $${TASKS_SOURCES} \
           $${CMDS_SOURCES}

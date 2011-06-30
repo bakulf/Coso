@@ -9,17 +9,30 @@
 
 CCmd* CCmdSwitch::helper(CApplication *application, const QStringList &arguments)
 {
-    if (arguments.size() == 2 &&
-        (arguments[0] == "switch" || arguments[0] == "sw"))
-        return new CCmdSwitch(application, arguments[1]);
+    if (arguments.size() < 2 || arguments.size() > 3)
+        return 0;
+
+    if (arguments[0] != "switch" && arguments[0] != "sw")
+        return 0;
+
+    QString context;
+    if (arguments.size() == 2)
+        context = arguments[1];
+    else {
+        if (arguments[1] == "-v" || arguments[1] == "--verbose")
+            return new CCmdSwitch(application, arguments[2], true);
+        else if (arguments[2] == "-v" || arguments[2] == "--verbose")
+            return new CCmdSwitch(application, arguments[1], true);
+    }
 
     return 0;
 }
 
-CCmdSwitch::CCmdSwitch(CApplication *application, const QString &context) :
+CCmdSwitch::CCmdSwitch(CApplication *application, const QString &context, bool verbose) :
     CCmd(application),
     m_application(application),
-    m_context(context)
+    m_context(context),
+    m_verbose(verbose)
 {
 }
 
@@ -49,6 +62,9 @@ int CCmdSwitch::run()
 int CCmdSwitch::run(const CContext *context)
 {
     foreach(CTask *task, context->tasks()) {
+        if (m_verbose)
+            std::cerr << "Executing task '" << qPrintable(task->name()) << "`..." << std::endl;
+
         if (task->run(context->name()))
             return 1;
     }

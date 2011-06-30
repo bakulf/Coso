@@ -10,7 +10,10 @@
 public: \
     static CTask* helper(CContext *context, \
                          const QString &name, \
-                         const QDomElement &root);
+                         const QDomElement &root); \
+    static bool generator(const QFileInfo &file);
+
+class QFileInfo;
 
 class CTask : public QObject
 {
@@ -23,6 +26,9 @@ public:
         m_type(type)
     {
     }
+
+public:
+    static bool generator(const QFileInfo &file, const char *string);
 
 public:
     const QString name() const { return m_name; }

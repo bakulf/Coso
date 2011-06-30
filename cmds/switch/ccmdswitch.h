@@ -12,7 +12,7 @@ class CCmdSwitch : public CCmd
     Q_OBJECT
 
 public:
-    CCmdSwitch(CApplication *application, const QString &context);
+    CCmdSwitch(CApplication *application, const QString &context, bool verbose);
     virtual ~CCmdSwitch();
 
 public:
@@ -22,6 +22,7 @@ public:
 private:
     CApplication *m_application;
     QString m_context;
+    bool m_verbose;
 
     CCMD_HELPER;
 };

@@ -1,18 +1,17 @@
-#ifndef _CTASK_FILE_H_
-#define _CTASK_FILE_H_
+#ifndef _CTASK_EDIT_FILE_H_
+#define _CTASK_EDIT_FILE_H_
 
 #include "ctask.h"
 
 class CContext;
 
-// Class for the help menu:
-class CTaskFile : public CTask
+class CTaskEditFile : public CTask
 {
     Q_OBJECT
 
 public:
-    CTaskFile(CContext *context, const QString &name, const QString &fileInput, const QString &fileOutput);
-    virtual ~CTaskFile();
+    CTaskEditFile(CContext *context, const QString &name, const QString &fileInput, const QString &fileOutput);
+    virtual ~CTaskEditFile();
 
 public:
     virtual const QString info() const;
