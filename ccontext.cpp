@@ -1,5 +1,6 @@
 #include "ccontext.h"
 
+#include "capplication.h"
 #include "ctask.h"
 #include "chelper.h"
 #include "constants.h"

@@ -3,8 +3,9 @@
 
 #include <QCoreApplication>
 #include <QStringList>
+#include <QPointer>
 
-class CContext;
+#include "ccontext.h"
 
 // Main class for this application:
 class CApplication : public QCoreApplication
@@ -19,14 +20,18 @@ public:
     int exec();
 
 public: // For Tasks:
-    const QList<CContext*> contexts() const { return m_contexts; }
+    const CContext *globalContext() const { return m_globalContext.data(); }
+
+    const QList<const CContext*> contexts() const { return m_contexts; }
 
 private:
     void readContexts();
 
 private:
     QStringList m_arguments;
-    QList<CContext*> m_contexts;
+
+    QPointer<CContext> m_globalContext;
+    QList<const CContext*> m_contexts;
 };
 
 #endif

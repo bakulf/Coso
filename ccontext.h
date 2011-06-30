@@ -1,11 +1,10 @@
 #ifndef _C_CONTEXT_H_
 #define _C_CONTEXT_H_
 
-#include "capplication.h"
-
 #include  <QFileInfo>
 
 class CTask;
+class CApplication;
 
 class CContext : public QObject
 {

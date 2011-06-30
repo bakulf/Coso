@@ -31,7 +31,14 @@ int CCmdSwitch::run()
 {
     foreach(const CContext *context, m_application->contexts()) {
         if (context->name() == m_context) {
-            return run(context);
+            int ret(0);
+            if (m_application->globalContext())
+                ret = run(m_application->globalContext());
+
+            if (ret == 0)
+                ret = run(context);
+
+            return ret;
         }
     }
 

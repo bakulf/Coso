@@ -67,9 +67,19 @@ void CApplication::readContexts()
         return;
     }
 
-    // Reading the list of tasks + config:
+    QFileInfo globalInfo(home.absoluteFilePath(C_GLOBAL));
+    if (!globalInfo.exists() && !home.mkdir(C_GLOBAL)) {
+        std::cerr << "WARNING: Error creating the folder '" << C_GLOBAL << "`." << std::endl;
+        return;
+    }
+
+    // Reading the global context:
+    m_globalContext = new CContext(this, globalInfo);
+
+    // Reading the list of contexts:
     QFileInfoList list = home.entryInfoList(QDir::AllDirs | QDir::NoDotAndDotDot, QDir::NoSort);
     foreach(const QFileInfo &info, list) {
-        m_contexts << new CContext(this, info);
+        if (info.fileName() != C_GLOBAL)
+            m_contexts << new CContext(this, info);
     }
 }
