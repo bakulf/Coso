@@ -25,25 +25,35 @@
 #define C_TASK_CREATEFILE_OUTPUT_TAG "FileOutput"
 
 // Templates ----------------------------------------------------------------
-// TODO: comments...
 #define C_TASK_EDITFILE_TEMPLATE \
     "<CosoTask>\n" \
     "  <Type>editFile</Type>\n" \
-    "  <FileInput>/home/baku/.ssh/config.coso</FileInput>\n" \
-    "  <FileOutput>/tmp/AA.txt</FileOutput>\n" \
+    "\n" \
+    "  <!-- this file is a template. Please, edit it this part: -->\n" \
+    "\n" \
+    "  <!-- FileInput must be used for the template of your file -->\n" \
+    "  <FileInput>/the/path/of/a/file.txt</FileInput>\n" \
+    "  <!-- FileOutput is the file that will be created from the template -->\n" \
+    "  <FileOutput>/the/output/file.txt</FileOutput>\n" \
     "</CosoTask>\n"
 
-// TODO: comments...
 #define C_TASK_REMOVEFILE_TEMPLATE \
     "<CosoTask>\n" \
-    "  <Type>editFile</Type>\n" \
-    "  <File>/home/baku/.ssh/AA.txt</File>\n" \
+    "  <Type>removeFile</Type>\n" \
+    "\n" \
+    "  <!-- this file is a template. Please, edit it this part: -->\n" \
+    "\n" \
+    "  <!-- Here, the path of the file you want to remove: -->\n" \
+    "  <File>/an/important/file.txt</File>\n" \
     "</CosoTask>\n"
 
-// TODO: comments...
 #define C_TASK_CREATEFILE_TEMPLATE \
     "<CosoTask>\n" \
-    "  <Type>editFile</Type>\n" \
-    "  <FileInput>/home/baku/.ssh/config.coso</FileInput>\n" \
-    "  <FileOutput>/tmp/AA.txt</FileOutput>\n" \
+    "  <Type>createFile</Type>\n" \
+    "\n" \
+    "  <!-- this file is a template. Please, edit it this part: -->\n" \
+    "\n" \
+    "  <!-- FileInput will be copied in the path of the output file. -->\n" \
+    "  <FileInput>/the/path/of/a/file.txt</FileInput>\n" \
+    "  <FileOutput>/the/new/file.txt</FileOutput>\n" \
     "</CosoTask>\n"

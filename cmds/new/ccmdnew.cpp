@@ -149,23 +149,20 @@ int CCmdNew::runTask(const QString &context, const QString &task, const QString 
         return 1;
     }
 
-    bool found(false);
-
     for (int i = 0; CTaskHelpers[i].type; i++) {
         if (type == CTaskHelpers[i].type) {
             if (!CTaskHelpers[i].generator(info))
                 return 1;
 
-            found = true;
+            std::cout << "Edit your new task: "
+                      << qPrintable(info.absoluteFilePath())
+                      << std::endl;
+            return 0;
         }
     }
 
-    if (found == false) {
-        std::cerr << "This type of task doesn't exist." << std::endl;
-        return 1;
-    }
-
-    return 0;
+    std::cerr << "This type of task doesn't exist." << std::endl;
+    return 1;
 }
 
 bool CCmdNew::validateName(const QString &name)
