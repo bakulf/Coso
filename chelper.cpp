@@ -7,6 +7,7 @@
 
 #include "ctaskeditfile.h"
 #include "ctaskremovefile.h"
+#include "ctaskcreatefile.h"
 
 // List of the commands:
 CCmdHelper CCmdHelpers[] = {
@@ -23,5 +24,6 @@ CCmdHelper CCmdHelpers[] = {
 CTaskHelper CTaskHelpers[] = {
     { "editFile",   "Edit a file (you must create a template)", CTaskEditFile::helper,   CTaskEditFile::generator   },
     { "removeFile", "Remove a file",                            CTaskRemoveFile::helper, CTaskRemoveFile::generator },
+    { "createFile", "Create a file",                            CTaskCreateFile::helper, CTaskCreateFile::generator },
     { 0,            0,                                          0,                       0                          }
 };

@@ -15,10 +15,9 @@ CCmd* CCmdSwitch::helper(CApplication *application, const QStringList &arguments
     if (arguments[0] != "switch" && arguments[0] != "sw")
         return 0;
 
-    QString context;
-    if (arguments.size() == 2)
-        context = arguments[1];
-    else {
+    if (arguments.size() == 2) {
+        return new CCmdSwitch(application, arguments[1], false);
+    } else {
         if (arguments[1] == "-v" || arguments[1] == "--verbose")
             return new CCmdSwitch(application, arguments[2], true);
         else if (arguments[2] == "-v" || arguments[2] == "--verbose")

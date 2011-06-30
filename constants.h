@@ -19,6 +19,11 @@
 #define C_TASK_REMOVEFILE_NAME "removeFile"
 #define C_TASK_REMOVEFILE_FILE_TAG "File"
 
+// Remove File Task ---------------------------------------------------------
+#define C_TASK_CREATEFILE_NAME "createFile"
+#define C_TASK_CREATEFILE_INPUT_TAG "FileInput"
+#define C_TASK_CREATEFILE_OUTPUT_TAG "FileOutput"
+
 // Templates ----------------------------------------------------------------
 // TODO: comments...
 #define C_TASK_EDITFILE_TEMPLATE \
@@ -33,4 +38,12 @@
     "<CosoTask>\n" \
     "  <Type>editFile</Type>\n" \
     "  <File>/home/baku/.ssh/AA.txt</File>\n" \
+    "</CosoTask>\n"
+
+// TODO: comments...
+#define C_TASK_CREATEFILE_TEMPLATE \
+    "<CosoTask>\n" \
+    "  <Type>editFile</Type>\n" \
+    "  <FileInput>/home/baku/.ssh/config.coso</FileInput>\n" \
+    "  <FileOutput>/tmp/AA.txt</FileOutput>\n" \
     "</CosoTask>\n"
