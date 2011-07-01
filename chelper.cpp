@@ -3,6 +3,7 @@
 #include "ccmdswitch.h"
 #include "ccmdinfo.h"
 #include "ccmdnew.h"
+#include "ccmddelete.h"
 #include "ccmdhelp.h"
 
 #include "ctaskeditfile.h"
@@ -15,6 +16,7 @@ CCmdHelper CCmdHelpers[] = {
     { "switch|sw [contextName] <--verbose|-v>", "change context",                         CCmdSwitch::helper  },
     { "info|i",                                 "show the configuration of the contexts", CCmdInfo::helper    },
     { "new|n <options>",                        "create a new context or a task",         CCmdNew::helper     },
+    { "delete|d <options>",                     "delete a new context or a task",         CCmdDelete::helper  },
 
     // The letest helper:
     { "help",                                   "this help",                              CCmdHelp::helper    },

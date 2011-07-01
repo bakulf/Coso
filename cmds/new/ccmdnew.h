@@ -7,7 +7,6 @@
 
 class CApplication;
 
-// New the context
 class CCmdNew : public CCmd
 {
     Q_OBJECT
@@ -24,7 +23,8 @@ private:
    int runContext(const QString &context);
    int runTask(const QString &context, const QString &task, const QString &type);
 
-   bool validateName(const QString &name);
+public:
+   static bool validateName(const QString &name);
 
 private:
     CApplication *m_application;

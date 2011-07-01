@@ -16,6 +16,7 @@ INCLUDEPATH += cmds        \
                cmds/switch \
                cmds/help   \
                cmds/new    \
+               cmds/delete \
                cmds/info
 
 INCLUDEPATH += tasks            \
@@ -29,11 +30,13 @@ DEPENDPATH  += $${INCLUDEPATH}
 CMDS_HEADERS = ccmdhelp.h   \
                ccmdswitch.h \
                ccmdnew.h    \
+               ccmddelete.h \
                ccmdinfo.h
 
 CMDS_SOURCES = ccmdhelp.cpp   \
                ccmdswitch.cpp \
                ccmdnew.cpp    \
+               ccmddelete.cpp \
                ccmdinfo.cpp
 
 TASKS_HEADERS = ctaskeditfile.h   \
