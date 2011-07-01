@@ -114,7 +114,7 @@ int CCmdDelete::runTask(const QString &context, const QString &task)
 
     if (!CCmdNew::validateName(task)) {
         std::cerr << "The name '"
-                  << qPrintable(context)
+                  << qPrintable(task)
                   << "` contains not acceptable characters or the length is wrong."
                   << std::endl;
         return 1;
