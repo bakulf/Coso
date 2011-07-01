@@ -44,6 +44,11 @@ int CCmdInfo::run()
 
 void CCmdInfo::runContext(const CContext *context) const
 {
+    if (context->tasks().isEmpty()) {
+        std::cout << "\tNo Tasks" << std::endl;
+        return;
+    }
+
     foreach(const CTask *task, context->tasks()) {
         std::cout << "\tTask: " << qPrintable(task->name()) << std::endl;
         std::cout << "\t\tType: " << qPrintable(task->type()) << std::endl;
