@@ -1,1 +1,101 @@
-TODO
+How to compile
+--------------
+
+    (user)$ qmake
+    (user)$ make
+
+Working with contexts
+---------------------
+
+The menu:
+
+    (user)$ coso
+    coso 0.1
+    
+    Usage: coso <command> [params]
+    
+    List of commands:
+     . switch|sw [contextName] <--verbose|-v>  change context
+     . info|i                                  show the configuration of the contexts
+     . new|n <options>                         create a new context or a task
+     . delete|d <options>                      delete a new context or a task
+     . help                                    this help
+
+List of contexts:
+
+    (user)$ coso info
+Global Context
+	No Tasks
+
+The global context contains global tasks.
+
+Let's create contexts:
+
+    (user)$ coso new context home
+    (user)$ coso new context work
+    (user)$ coso new context blabla
+    (user)$ coso info
+    Global Context
+    	No Tasks
+    Context: home
+    	No Tasks
+    Context: work
+    	No Tasks
+    Context: blabla
+    	No Tasks
+
+How to remove a context:
+
+    (user)$ coso delte context blabla
+
+Working with Tasks
+------------------
+
+The menu:
+
+    (user)$ coso new
+    Usage: ... new [context|task] <option>
+    
+    Usage for context:
+    Usage: ... new context [contextName] (use '_global` for the global context)
+    
+    Usage for task:
+    Usage: ... new task [contextName] [taskName] [type]
+    
+    List of types for tasks:
+     . editFile                      Edit a file (you must create a template)
+     . removeFile                    Remove a file
+     . createFile                    Create a file
+     . gconf                         Set values on some gconf key
+
+Let's create a dummy task:
+
+    (user)$ coso new task home dummyTask editFile
+    Edit your new task: /root/.coso/home/dummyTask
+    (user)$ vi /root/.coso/home/dummyTask
+
+The editFile task will read the template file (FileInput in the XML
+document of the task) and it will create the output file (FileOutput).
+The templating system supports these keyworks:
+
+ - __COSO_START__ <nameOfTheContext>
+ - __COSO_END__ <nameOfTheContext>
+
+if the current context is called '<nameOfTheContext>', any line between
+these 2 keyworks will be inserted in the output file.
+For instance:
+
+    #This is a configuration file...
+    __COSO_START__ home
+    proxy: localhost:8080
+    __COSO_END__ home
+    __COSO_START__ work
+    proxy: company.net:8080
+    __COSO_END__ home
+
+Switch the contexts
+-------------------
+
+    (user)$ coso switch home
+
+Bye
