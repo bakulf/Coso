@@ -11,7 +11,7 @@ CTask *CTaskEditFile::helper(CContext *context, const QString &name, const QDomE
     if (fileInput.isNull()) {
         std::cerr << "WARNING: No input file for the task '"
                   << qPrintable(name)
-                  << "`." << std::endl;
+                  << "` (task ignored)." << std::endl;
         return 0;
     }
 
@@ -19,7 +19,7 @@ CTask *CTaskEditFile::helper(CContext *context, const QString &name, const QDomE
     if (fileOutput.isNull()) {
         std::cerr << "WARNING: No output file for the task '"
                   << qPrintable(name)
-                  << "`." << std::endl;
+                  << "` (task ignored)." << std::endl;
         return 0;
     }
 
@@ -56,14 +56,14 @@ int CTaskEditFile::run(const QString &context)
     QFile output(m_fileOutput);
 
     if (!input.open(QIODevice::ReadOnly)) {
-        std::cerr << "WARNING: Error opening the file '"
+        std::cerr << "ERROR: Error opening the file '"
                   << qPrintable(m_fileInput)
                   << "\"." << std::endl;
         return 1;
     }
 
     if (!output.open(QIODevice::WriteOnly)) {
-        std::cerr << "WARNING: Error opening the file '"
+        std::cerr << "ERROR: Error opening the file '"
                   << qPrintable(m_fileOutput)
                   << "\"." << std::endl;
         return 1;
@@ -95,7 +95,7 @@ int CTaskEditFile::run(const QString &context)
         for (qint64 done = 0; done < size;) {
             qint64 ret = output.write(buffer + done);
             if (ret <= 0) {
-                std::cerr << "WARNING: Error writing in the file '"
+                std::cerr << "ERROR: Error writing in the file '"
                           << qPrintable(m_fileOutput)
                           << "\"." << std::endl;
                 break;

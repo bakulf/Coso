@@ -11,7 +11,7 @@ CTask *CTaskCreateFile::helper(CContext *context, const QString &name, const QDo
     if (fileInput.isNull()) {
         std::cerr << "WARNING: No input file for the task '"
                   << qPrintable(name)
-                  << "`." << std::endl;
+                  << "` (task ignored)." << std::endl;
         return 0;
     }
 
@@ -19,7 +19,7 @@ CTask *CTaskCreateFile::helper(CContext *context, const QString &name, const QDo
     if (fileOutput.isNull()) {
         std::cerr << "WARNING: No output file for the task '"
                   << qPrintable(name)
-                  << "`." << std::endl;
+                  << "` (task ignored)." << std::endl;
         return 0;
     }
 
@@ -60,7 +60,7 @@ int CTaskCreateFile::run(const QString &context)
     }
 
     if (!QFile::copy(m_fileInput, m_fileOutput)) {
-        std::cerr << "WARNING: Error coping file '"
+        std::cerr << "ERROR: Error coping file '"
                   << qPrintable(m_fileInput)
                   << "` in '"
                   << qPrintable(m_fileOutput)

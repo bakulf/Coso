@@ -29,7 +29,7 @@ void CContext::readTask(const QFileInfo &file)
 {
     QFile fd(file.absoluteFilePath());
     if (!fd.open(QIODevice::ReadOnly)) {
-        std::cerr << "WARNING: Error opening the file '"
+        std::cerr << "ERROR: Error opening the file '"
                   << qPrintable(file.absoluteFilePath())
                   << "`." << std::endl;
         return;
@@ -37,7 +37,7 @@ void CContext::readTask(const QFileInfo &file)
 
     QDomDocument doc;
     if (!doc.setContent(&fd)) {
-        std::cerr << "WARNING: Error parsing the file '"
+        std::cerr << "ERROR: Error parsing the file '"
                   << qPrintable(file.absoluteFilePath())
                   << "`." << std::endl;
        fd.close();
@@ -52,7 +52,7 @@ void CContext::readTask(const QFileInfo &file)
         std::cerr << "WARNING: The root task of the file '"
                   << qPrintable(file.absoluteFilePath())
                   << "` is not '" << C_TASK_ROOT_TAG
-                  << "`." << std::endl;
+                  << "` (task ignored)." << std::endl;
         return;
     }
 
@@ -60,7 +60,7 @@ void CContext::readTask(const QFileInfo &file)
     if (child.isNull()) {
         std::cerr << "WARNING: No type for the task of the file '"
                   << qPrintable(file.absoluteFilePath())
-                  << "`." << std::endl;
+                  << "` (task ignored)." << std::endl;
         return;
     }
 
@@ -81,6 +81,6 @@ void CContext::readTask(const QFileInfo &file)
         std::cerr << "WARNING: Type '" << qPrintable(type)
                   << "` doesn't exist for the file '"
                   << qPrintable(file.absoluteFilePath())
-                  << "`." << std::endl;
+                  << "` (task ignored)." << std::endl;
     }
 }

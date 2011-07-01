@@ -53,27 +53,27 @@ void CApplication::readContexts()
     QFileInfo info(home.absoluteFilePath(C_PATH));
 
     if (info.exists() && !info.isDir()) {
-        std::cerr << "WARNING: The folder '"
+        std::cerr << "ERROR: The folder '"
                   << C_PATH << "` exists but it's not a folder... ?"
                   << std::endl;
         return;
     }
 
     if (!info.exists() && !home.mkdir(C_PATH)) {
-        std::cerr << "WARNING: Error creating the folder '"
+        std::cerr << "ERROR: Error creating the folder '"
                   << C_PATH << "`." << std::endl;
         return;
     }
 
     if (!home.cd(C_PATH)) {
-        std::cerr << "WARNING: Error opening the folder '"
+        std::cerr << "ERROR: Error opening the folder '"
                   << C_PATH << "`." << std::endl;
         return;
     }
 
     QFileInfo globalInfo(home.absoluteFilePath(C_GLOBAL));
     if (!globalInfo.exists() && !home.mkdir(C_GLOBAL)) {
-        std::cerr << "WARNING: Error creating the folder '"
+        std::cerr << "ERROR: Error creating the folder '"
                   << C_GLOBAL << "`." << std::endl;
         return;
     }

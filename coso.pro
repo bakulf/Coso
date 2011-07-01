@@ -7,6 +7,9 @@ QT      += xml
 MOC_DIR     = .moc
 OBJECTS_DIR = .obj
 
+CONFIG    += link_pkgconfig
+PKGCONFIG += gconf-2.0
+
 QMAKE_CXXFLAGS *= -Werror
 
 INCLUDEPATH += cmds        \
@@ -18,7 +21,8 @@ INCLUDEPATH += cmds        \
 INCLUDEPATH += tasks            \
                tasks/editFile   \
                tasks/removeFile \
-               tasks/createFile
+               tasks/createFile \
+               tasks/gconf
 
 DEPENDPATH  += $${INCLUDEPATH}
 
@@ -34,11 +38,13 @@ CMDS_SOURCES = ccmdhelp.cpp   \
 
 TASKS_HEADERS = ctaskeditfile.h   \
                 ctaskremovefile.h \
-                ctaskcreatefile.h
+                ctaskcreatefile.h \
+                ctaskgconf.h
 
 TASKS_SOURCES = ctaskeditfile.cpp   \
                 ctaskremovefile.cpp \
-                ctaskcreatefile.cpp
+                ctaskcreatefile.cpp \
+                ctaskgconf.cpp
 
 HEADERS = constants.h       \
           capplication.h    \

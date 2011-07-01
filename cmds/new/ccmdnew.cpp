@@ -52,7 +52,8 @@ int CCmdNew::runHelp()
     std::cerr << std::endl;
 
     std::cerr << "Usage for context:" << std::endl;
-    std::cerr << "Usage: ... new context [contextName]" << std::endl;
+    std::cerr << "Usage: ... new context [contextName] (use '"
+              << C_GLOBAL << "` for the global context)" << std::endl;
     std::cerr << std::endl;
 
     std::cerr << "Usage for task:" << std::endl;
@@ -109,7 +110,7 @@ int CCmdNew::runContext(const QString &context)
 
 int CCmdNew::runTask(const QString &context, const QString &task, const QString &type)
 {
-    if (!validateName(context)) {
+    if (context != C_GLOBAL && !validateName(context)) {
         std::cerr << "The name '" << qPrintable(context)
                   << "` contains not acceptable characters or the length is wrong."
                   << std::endl;

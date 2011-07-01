@@ -11,7 +11,7 @@ CTask *CTaskRemoveFile::helper(CContext *context, const QString &name, const QDo
     if (file.isNull()) {
         std::cerr << "WARNING: No file for the task '"
                   << qPrintable(name)
-                  << "`." << std::endl;
+                  << "` (task ignored)." << std::endl;
         return 0;
     }
 
@@ -51,7 +51,7 @@ int CTaskRemoveFile::run(const QString &context)
     }
 
     if (!QFile::remove(m_file)) {
-        std::cerr << "WARNING: Error removing file '"
+        std::cerr << "ERROR: Error removing file '"
                   << qPrintable(m_file)
                   << "`." << std::endl;
     }

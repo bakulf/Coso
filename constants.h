@@ -7,22 +7,29 @@
 #define C_TASK_TYPE_TAG "Type"
 
 // Edit File Task -----------------------------------------------------------
-#define C_TASK_EDITFILE_NAME "editFile"
+#define C_TASK_EDITFILE_NAME        "editFile"
 
-#define C_TASK_EDITFILE_INPUT_TAG "FileInput"
-#define C_TASK_EDITFILE_OUTPUT_TAG "FileOutput"
+#define C_TASK_EDITFILE_INPUT_TAG   "FileInput"
+#define C_TASK_EDITFILE_OUTPUT_TAG  "FileOutput"
 
 #define C_TASK_EDITFILE_TOKEN_START "__COSO_START__"
 #define C_TASK_EDITFILE_TOKEN_END   "__COSO_END__"
 
 // Remove File Task ---------------------------------------------------------
-#define C_TASK_REMOVEFILE_NAME "removeFile"
+#define C_TASK_REMOVEFILE_NAME      "removeFile"
 #define C_TASK_REMOVEFILE_FILE_TAG "File"
 
 // Remove File Task ---------------------------------------------------------
-#define C_TASK_CREATEFILE_NAME "createFile"
-#define C_TASK_CREATEFILE_INPUT_TAG "FileInput"
+#define C_TASK_CREATEFILE_NAME       "createFile"
+#define C_TASK_CREATEFILE_INPUT_TAG  "FileInput"
 #define C_TASK_CREATEFILE_OUTPUT_TAG "FileOutput"
+
+// GConf Task ---------------------------------------------------------------
+#define C_TASK_GCONF_NAME      "gconf"
+#define C_TASK_GCONF_ENTRY_TAG "Entry"
+#define C_TASK_GCONF_KEY_TAG   "Key"
+#define C_TASK_GCONF_VALUE_TAG "Value"
+#define C_TASK_GCONF_TYPE_ATTR "type"
 
 // Templates ----------------------------------------------------------------
 #define C_TASK_EDITFILE_TEMPLATE \
@@ -56,4 +63,30 @@
     "  <!-- FileInput will be copied in the path of the output file. -->\n" \
     "  <FileInput>/the/path/of/a/file.txt</FileInput>\n" \
     "  <FileOutput>/the/new/file.txt</FileOutput>\n" \
+    "</CosoTask>\n"
+
+#define C_TASK_GCONF_TEMPLATE \
+    "<CosoTask>\n" \
+    "  <Type>gconf</Type>\n" \
+    "\n" \
+    "  <!-- this file is a template. Please, edit it this part: -->\n" \
+    "\n" \
+    "  <!-- List of entries to be changed. The values types are:\n" \
+    "       string, bool, integer, float. -->\n" \
+    "  <Entry>\n" \
+    "    <Key>/a/key</Key>\n" \
+    "    <Value type=\"string\">the value</Value>\n" \
+    "  </Entry>\n" \
+    "  <Entry>\n" \
+    "    <Key>/a/key</Key>\n" \
+    "    <Value type=\"bool\">true</Value>\n" \
+    "  </Entry>\n" \
+    "  <Entry>\n" \
+    "    <Key>/a/key</Key>\n" \
+    "    <Value type=\"integer\">123</Value>\n" \
+    "  </Entry>\n" \
+    "  <Entry>\n" \
+    "    <Key>/a/key</Key>\n" \
+    "    <Value type=\"float\">123.43</Value>\n" \
+    "  </Entry>\n" \
     "</CosoTask>\n"

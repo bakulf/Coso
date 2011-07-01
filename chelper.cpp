@@ -8,6 +8,7 @@
 #include "ctaskeditfile.h"
 #include "ctaskremovefile.h"
 #include "ctaskcreatefile.h"
+#include "ctaskgconf.h"
 
 // List of the commands:
 CCmdHelper CCmdHelpers[] = {
@@ -25,5 +26,6 @@ CTaskHelper CTaskHelpers[] = {
     { "editFile",   "Edit a file (you must create a template)", CTaskEditFile::helper,   CTaskEditFile::generator   },
     { "removeFile", "Remove a file",                            CTaskRemoveFile::helper, CTaskRemoveFile::generator },
     { "createFile", "Create a file",                            CTaskCreateFile::helper, CTaskCreateFile::generator },
+    { "gconf",      "Set values on some gconf key",             CTaskGConf::helper,      CTaskGConf::generator      },
     { 0,            0,                                          0,                       0                          }
 };
