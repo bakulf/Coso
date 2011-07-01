@@ -17,7 +17,7 @@ public:
 
 public:
     int run();
-    int run(const CContext *context);
+    int run(const CContext *context, const QString &contextName);
 
 private:
     CApplication *m_application;

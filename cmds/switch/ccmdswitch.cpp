@@ -45,10 +45,10 @@ int CCmdSwitch::run()
         if (context->name() == m_context) {
             int ret(0);
             if (m_application->globalContext())
-                ret = run(m_application->globalContext());
+                ret = run(m_application->globalContext(), m_context);
 
             if (ret == 0)
-                ret = run(context);
+                ret = run(context, m_context);
 
             return ret;
         }
@@ -58,13 +58,13 @@ int CCmdSwitch::run()
     return 1;
 }
 
-int CCmdSwitch::run(const CContext *context)
+int CCmdSwitch::run(const CContext *context, const QString &contextName)
 {
     foreach(CTask *task, context->tasks()) {
         if (m_verbose)
             std::cerr << "Executing task '" << qPrintable(task->name()) << "`..." << std::endl;
 
-        if (task->run(context->name()))
+        if (task->run(contextName))
             return 1;
     }
 

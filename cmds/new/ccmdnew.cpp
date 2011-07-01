@@ -119,7 +119,7 @@ int CCmdNew::runTask(const QString &context, const QString &task, const QString 
 
     if (!validateName(task)) {
         std::cerr << "The name '"
-                  << qPrintable(context)
+                  << qPrintable(task)
                   << "` contains not acceptable characters or the length is wrong."
                   << std::endl;
         return 1;
@@ -171,7 +171,7 @@ bool CCmdNew::validateName(const QString &name)
     for (int i = 0, len = name.size(); i < len; i++) {
         if ((name.at(i) < 'a' || name.at(i) > 'z') &&
             (name.at(i) < 'A' || name.at(i) > 'Z') &&
-            (name.at(i) < '1' || name.at(i) > '9') &&
+            (name.at(i) < '0' || name.at(i) > '9') &&
             name.at(i) != '_' &&
             name.at(i) != '-') {
             return false;

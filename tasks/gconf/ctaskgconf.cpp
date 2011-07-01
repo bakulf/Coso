@@ -33,7 +33,8 @@ CTask *CTaskGConf::helper(CContext *context, const QString &name, const QDomElem
             }
         }
 
-        if (!key.isEmpty() && !value.isEmpty()) {
+        // Type and value can be empty
+        if (!key.isEmpty()) {
             map.insert(key, QPair<Type, QString>(type, value));
         }
     }
@@ -127,7 +128,7 @@ GConfValue *CTaskGConf::valueToGConf(const QString &key, Type type, const QStrin
 
         case Bool:
             value = gconf_value_new(GCONF_VALUE_BOOL);
-            gconf_value_set_float(value, str == "true" ? TRUE : FALSE);
+            gconf_value_set_bool(value, str == "true" ? TRUE : FALSE);
             return value;
     }
 
