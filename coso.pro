@@ -65,3 +65,14 @@ SOURCES = main.cpp          \
           chelper.cpp       \
           $${TASKS_SOURCES} \
           $${CMDS_SOURCES}
+
+unix {
+    isEmpty(PREFIX) {
+        PREFIX = /usr
+    }
+
+    BINDIR = $$PREFIX/bin
+    target.path =$$BINDIR
+
+    INSTALLS += target
+}

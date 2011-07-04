@@ -1,3 +1,11 @@
+/* *** This file is part of 'coso` ***
+ *
+ * Copyright (C) 2011 Andrea Marchesini <baku@ippolita.net>.
+ *
+ * This program is free software. It is released under the terms of
+ * the BSD License. See license.txt for more details.
+ */
+
 #ifndef _CCMD_HELP_H_
 #define _CCMD_HELP_H_
 
