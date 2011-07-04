@@ -6,10 +6,11 @@
  * the BSD License. See license.txt for more details.
  */
 
-#define C_PACKAGE  "coso"
-#define C_VERSION  "0.1"
-#define C_PATH     ".coso"
-#define C_GLOBAL   "_global"
+#define C_PACKAGE   "coso"
+#define C_VERSION   "0.1"
+#define C_COPYRIGHT "Andrea Marchesini <baku@ippolita.net> - BSD license"
+#define C_PATH      ".coso"
+#define C_GLOBAL    "_global"
 
 #define C_TASK_ROOT_TAG "CosoTask"
 #define C_TASK_TYPE_TAG "Type"

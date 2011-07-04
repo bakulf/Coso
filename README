@@ -3,6 +3,7 @@ How to compile
 
     (user)$ qmake
     (user)$ make
+    (root)# make install
 
 Working with contexts
 ---------------------

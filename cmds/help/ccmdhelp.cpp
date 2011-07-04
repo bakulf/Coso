@@ -33,7 +33,10 @@ CCmdHelp::~CCmdHelp()
 // Help is simple:
 int CCmdHelp::run()
 {
-    std::cerr << C_PACKAGE << " " << C_VERSION << std::endl;
+    std::cerr << C_PACKAGE << " "
+              << C_VERSION << " - "
+              << C_COPYRIGHT << std::endl;
+
     std::cerr << std::endl;
     std::cerr << "Usage: " << C_PACKAGE << " <command> [params]" <<std::endl;
     std::cerr << std::endl;
