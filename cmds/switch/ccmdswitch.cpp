@@ -62,7 +62,7 @@ int CCmdSwitch::run()
         }
     }
 
-    std::cerr << "This context doesn't exist." << std::endl;
+    std::cerr << "The context `" << qPrintable(m_context) << "' doesn't exist." << std::endl;
     return 1;
 }
 
