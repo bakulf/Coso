@@ -19,7 +19,8 @@
 #include <iostream>
 
 CContext::CContext(CApplication *application, const QFileInfo &info) :
-    QObject(application)
+    QObject(application),
+    m_application(application)
 {
     m_name = info.fileName();
 

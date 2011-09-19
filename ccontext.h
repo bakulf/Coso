@@ -23,6 +23,8 @@ public:
     virtual ~CContext();
 
 public:
+    CApplication *application() const { return m_application; }
+
     const QString name() const { return m_name; }
 
     const QList<CTask*> tasks() const { return m_tasks; }
@@ -31,6 +33,8 @@ private:
     void readTask(const QFileInfo &file);
 
 private:
+    CApplication *m_application;
+
     QString m_name;
     QList<CTask*> m_tasks;
 };

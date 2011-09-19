@@ -48,6 +48,10 @@
 #define C_TASK_EXEC_NAME        "exec"
 #define C_TASK_EXEC_PROCESS_TAG "Process"
 
+// SubContext Task ----------------------------------------------------------
+#define C_TASK_SUBCONTEXT_NAME        "subContext"
+#define C_TASK_SUBCONTEXT_SUBCONTEXT_TAG "SubContext"
+
 // Templates ----------------------------------------------------------------
 #define C_TASK_EDITFILE_TEMPLATE \
     "<CosoTask>\n" \
@@ -119,7 +123,6 @@
     "  <!--ProcessName>etc etc</ProcessName-->\n" \
     "</CosoTask>\n"
 
-
 #define C_TASK_EXEC_TEMPLATE \
     "<CosoTask>\n" \
     "  <Type>exec</Type>\n" \
@@ -129,4 +132,13 @@
     "  <Process>firefox -no-remote -P test</Process>\n" \
     "  <Process>skype</Process>\n" \
     "  <!--Process>etc etc</Process-->\n" \
+    "</CosoTask>\n"
+
+#define C_TASK_SUBCONTEXT_TEMPLATE \
+    "<CosoTask>\n" \
+    "  <Type>subContext</Type>\n" \
+    "\n" \
+    "  <!-- this file is a template. Please, edit this part: -->\n" \
+    "\n" \
+    "  <SubContext>another context</SubContext>\n" \
     "</CosoTask>\n"

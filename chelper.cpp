@@ -20,6 +20,7 @@
 #include "ctaskgconf.h"
 #include "ctaskkill.h"
 #include "ctaskexec.h"
+#include "ctasksubcontext.h"
 
 // List of the commands:
 CCmdHelper CCmdHelpers[] = {
@@ -41,5 +42,6 @@ CTaskHelper CTaskHelpers[] = {
     { "gconf",      "Set values on some gconf key",             CTaskGConf::helper,      CTaskGConf::generator      },
     { "kill",       "Kill a process",                           CTaskKill::helper,       CTaskKill::generator       },
     { "exec",       "Exec a process",                           CTaskExec::helper,       CTaskExec::generator       },
+    { "subContext", "Run another context",                      CTaskSubContext::helper, CTaskSubContext::generator },
     { 0,            0,                                          0,                       0                          }
 };
