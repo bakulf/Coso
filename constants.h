@@ -40,12 +40,16 @@
 #define C_TASK_GCONF_VALUE_TAG "Value"
 #define C_TASK_GCONF_TYPE_ATTR "type"
 
+// Kill Task ----------------------------------------------------------------
+#define C_TASK_KILL_NAME             "kill"
+#define C_TASK_KILL_PROCESS_NAME_TAG "ProcessName"
+
 // Templates ----------------------------------------------------------------
 #define C_TASK_EDITFILE_TEMPLATE \
     "<CosoTask>\n" \
     "  <Type>editFile</Type>\n" \
     "\n" \
-    "  <!-- this file is a template. Please, edit it this part: -->\n" \
+    "  <!-- this file is a template. Please, edit this part: -->\n" \
     "\n" \
     "  <!-- FileInput must be used for the template of your file -->\n" \
     "  <FileInput>/the/path/of/a/file.txt</FileInput>\n" \
@@ -57,7 +61,7 @@
     "<CosoTask>\n" \
     "  <Type>removeFile</Type>\n" \
     "\n" \
-    "  <!-- this file is a template. Please, edit it this part: -->\n" \
+    "  <!-- this file is a template. Please, edit this part: -->\n" \
     "\n" \
     "  <!-- Here, the path of the file you want to remove: -->\n" \
     "  <File>/an/important/file.txt</File>\n" \
@@ -67,7 +71,7 @@
     "<CosoTask>\n" \
     "  <Type>createFile</Type>\n" \
     "\n" \
-    "  <!-- this file is a template. Please, edit it this part: -->\n" \
+    "  <!-- this file is a template. Please, edit this part: -->\n" \
     "\n" \
     "  <!-- FileInput will be copied in the path of the output file. -->\n" \
     "  <FileInput>/the/path/of/a/file.txt</FileInput>\n" \
@@ -78,7 +82,7 @@
     "<CosoTask>\n" \
     "  <Type>gconf</Type>\n" \
     "\n" \
-    "  <!-- this file is a template. Please, edit it this part: -->\n" \
+    "  <!-- this file is a template. Please, edit this part: -->\n" \
     "\n" \
     "  <!-- List of entries to be changed. The values types are:\n" \
     "       string, bool, integer, float. -->\n" \
@@ -99,3 +103,15 @@
     "    <Value type=\"float\">123.43</Value>\n" \
     "  </Entry>\n" \
     "</CosoTask>\n"
+
+#define C_TASK_KILL_TEMPLATE \
+    "<CosoTask>\n" \
+    "  <Type>kill</Type>\n" \
+    "\n" \
+    "  <!-- this file is a template. Please, edit this part: -->\n" \
+    "\n" \
+    "  <ProcessName>firefox</ProcessName>\n" \
+    "  <ProcessName>skype</ProcessName>\n" \
+    "  <!--ProcessName>etc etc skype</ProcessName-->\n" \
+    "</CosoTask>\n"
+

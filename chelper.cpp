@@ -18,6 +18,7 @@
 #include "ctaskremovefile.h"
 #include "ctaskcreatefile.h"
 #include "ctaskgconf.h"
+#include "ctaskkill.h"
 
 // List of the commands:
 CCmdHelper CCmdHelpers[] = {
@@ -37,5 +38,6 @@ CTaskHelper CTaskHelpers[] = {
     { "removeFile", "Remove a file",                            CTaskRemoveFile::helper, CTaskRemoveFile::generator },
     { "createFile", "Create a file",                            CTaskCreateFile::helper, CTaskCreateFile::generator },
     { "gconf",      "Set values on some gconf key",             CTaskGConf::helper,      CTaskGConf::generator      },
+    { "kill",       "Kill a process",                           CTaskKill::helper,       CTaskKill::generator       },
     { 0,            0,                                          0,                       0                          }
 };

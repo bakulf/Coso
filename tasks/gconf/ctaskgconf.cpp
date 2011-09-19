@@ -67,7 +67,7 @@ CTaskGConf::~CTaskGConf()
 
 const QString CTaskGConf::info() const
 {
-    return QString("Changes some GCOnf keys/values.");
+    return QString("Changes some GConf keys/values.");
 }
 
 

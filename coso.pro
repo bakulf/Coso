@@ -23,7 +23,8 @@ INCLUDEPATH += tasks            \
                tasks/editFile   \
                tasks/removeFile \
                tasks/createFile \
-               tasks/gconf
+               tasks/gconf      \
+               tasks/kill
 
 DEPENDPATH  += $${INCLUDEPATH}
 
@@ -42,12 +43,14 @@ CMDS_SOURCES = ccmdhelp.cpp   \
 TASKS_HEADERS = ctaskeditfile.h   \
                 ctaskremovefile.h \
                 ctaskcreatefile.h \
-                ctaskgconf.h
+                ctaskgconf.h      \
+                ctaskkill.h
 
 TASKS_SOURCES = ctaskeditfile.cpp   \
                 ctaskremovefile.cpp \
                 ctaskcreatefile.cpp \
-                ctaskgconf.cpp
+                ctaskgconf.cpp      \
+                ctaskkill.cpp
 
 HEADERS = constants.h       \
           capplication.h    \
