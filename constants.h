@@ -44,6 +44,10 @@
 #define C_TASK_KILL_NAME             "kill"
 #define C_TASK_KILL_PROCESS_NAME_TAG "ProcessName"
 
+// Exec Task ----------------------------------------------------------------
+#define C_TASK_EXEC_NAME        "exec"
+#define C_TASK_EXEC_PROCESS_TAG "Process"
+
 // Templates ----------------------------------------------------------------
 #define C_TASK_EDITFILE_TEMPLATE \
     "<CosoTask>\n" \
@@ -112,6 +116,17 @@
     "\n" \
     "  <ProcessName>firefox</ProcessName>\n" \
     "  <ProcessName>skype</ProcessName>\n" \
-    "  <!--ProcessName>etc etc skype</ProcessName-->\n" \
+    "  <!--ProcessName>etc etc</ProcessName-->\n" \
     "</CosoTask>\n"
 
+
+#define C_TASK_EXEC_TEMPLATE \
+    "<CosoTask>\n" \
+    "  <Type>exec</Type>\n" \
+    "\n" \
+    "  <!-- this file is a template. Please, edit this part: -->\n" \
+    "\n" \
+    "  <Process>firefox -no-remote -P test</Process>\n" \
+    "  <Process>skype</Process>\n" \
+    "  <!--Process>etc etc</Process-->\n" \
+    "</CosoTask>\n"
