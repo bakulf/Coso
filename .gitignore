@@ -10,3 +10,4 @@ core.*
 *.a
 *.o
 coso
+qrc_coso.cpp

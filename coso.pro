@@ -1,7 +1,6 @@
 TEMPLATE = app
 TARGET   = coso
 
-QT      -= gui
 QT      += xml
 
 MOC_DIR     = .moc
@@ -12,11 +11,12 @@ PKGCONFIG += gconf-2.0
 
 QMAKE_CXXFLAGS *= -Werror
 
-INCLUDEPATH += cmds        \
-               cmds/switch \
-               cmds/help   \
-               cmds/new    \
-               cmds/delete \
+INCLUDEPATH += cmds         \
+               cmds/switch  \
+               cmds/systray \
+               cmds/help    \
+               cmds/new     \
+               cmds/delete  \
                cmds/info
 
 INCLUDEPATH += tasks            \
@@ -30,16 +30,18 @@ INCLUDEPATH += tasks            \
 
 DEPENDPATH  += $${INCLUDEPATH}
 
-CMDS_HEADERS = ccmdhelp.h   \
-               ccmdswitch.h \
-               ccmdnew.h    \
-               ccmddelete.h \
+CMDS_HEADERS = ccmdhelp.h    \
+               ccmdswitch.h  \
+               ccmdsystray.h \
+               ccmdnew.h     \
+               ccmddelete.h  \
                ccmdinfo.h
 
-CMDS_SOURCES = ccmdhelp.cpp   \
-               ccmdswitch.cpp \
-               ccmdnew.cpp    \
-               ccmddelete.cpp \
+CMDS_SOURCES = ccmdhelp.cpp    \
+               ccmdswitch.cpp  \
+               ccmdsystray.cpp \
+               ccmdnew.cpp     \
+               ccmddelete.cpp  \
                ccmdinfo.cpp
 
 TASKS_HEADERS = ctaskeditfile.h   \
@@ -74,6 +76,8 @@ SOURCES = main.cpp          \
           chelper.cpp       \
           $${TASKS_SOURCES} \
           $${CMDS_SOURCES}
+
+RESOURCES = coso.qrc
 
 unix {
     isEmpty(PREFIX) {

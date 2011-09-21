@@ -18,8 +18,8 @@
 
 #include <iostream>
 
-CApplication::CApplication(int argc, char **argv) :
-    QCoreApplication(argc, argv)
+CApplication::CApplication(int &argc, char **argv) :
+    QApplication(argc, argv)
 {
     // Get the list of args
     m_arguments = arguments();
@@ -33,7 +33,7 @@ CApplication::~CApplication()
 }
 
 // The real main:
-int CApplication::exec()
+int CApplication::run()
 {
     int ret = 0;
 

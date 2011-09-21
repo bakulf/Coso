@@ -9,23 +9,23 @@
 #ifndef _C_APPLICATION_H_
 #define _C_APPLICATION_H_
 
-#include <QCoreApplication>
+#include <QApplication>
 #include <QStringList>
 #include <QPointer>
 
 #include "ccontext.h"
 
 // Main class for this application:
-class CApplication : public QCoreApplication
+class CApplication : public QApplication
 {
     Q_OBJECT
 
 public:
-    CApplication(int argc, char **argv);
+    CApplication(int &argc, char **argv);
     virtual ~CApplication();
 
 public:
-    int exec();
+    int run();
 
 public: // For Tasks:
     const CContext *globalContext() const { return m_globalContext.data(); }
