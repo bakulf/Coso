@@ -11,10 +11,12 @@
 
 #include "ccmd.h"
 
+#include <QSystemTrayIcon>
+
 class CApplication;
 class CContext;
 
-class QSystemTrayIcon;
+class QMenu;
 
 // Systray
 class CCmdSystray : public CCmd
@@ -30,10 +32,13 @@ public:
 
 private Q_SLOTS:
     void changeContext();
+    void activated(QSystemTrayIcon::ActivationReason reason);
 
 private:
     CApplication *m_application;
+
     QSystemTrayIcon *m_sysTray;
+    QMenu *m_menu;
 
     CCMD_HELPER;
 };

@@ -15,7 +15,6 @@
 
 #include <QMenu>
 #include <QAction>
-#include <QSystemTrayIcon>
 
 CCmd* CCmdSystray::helper(CApplication *application, const QStringList &arguments)
 {
@@ -31,43 +30,51 @@ CCmd* CCmdSystray::helper(CApplication *application, const QStringList &argument
 CCmdSystray::CCmdSystray(CApplication *application) :
     CCmd(application),
     m_application(application),
-    m_sysTray(new QSystemTrayIcon())
+    m_sysTray(new QSystemTrayIcon()),
+    m_menu(new QMenu())
 {
     m_sysTray->setIcon(QIcon(":/images/icon.png"));
-}
-
-CCmdSystray::~CCmdSystray()
-{
-    delete m_sysTray;
-}
-
-int CCmdSystray::run()
-{
-    QMenu *menu = new QMenu();
 
     foreach(const CContext *context, m_application->contexts()) {
         QAction *action = new QAction(context->name(), this);
-        menu->addAction(action);
+        m_menu->addAction(action);
         connect(action,
                 SIGNAL(triggered()),
                 SLOT(changeContext()));
     }
 
-    menu->addSeparator();
+    m_menu->addSeparator();
 
     {
         QAction *quit = new QAction("Quit", this);
-        menu->addAction(quit);
+        m_menu->addAction(quit);
         connect(quit,
                 SIGNAL(triggered()),
                 m_application,
                 SLOT(quit()));
     }
 
-    m_sysTray->setContextMenu(menu);
-    m_sysTray->show();
+    m_sysTray->setContextMenu(m_menu);
 
+    connect(m_sysTray,
+            SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
+            SLOT(activated(QSystemTrayIcon::ActivationReason)));
+}
+
+CCmdSystray::~CCmdSystray()
+{
+}
+
+int CCmdSystray::run()
+{
+    m_sysTray->show();
     return m_application->exec();
+}
+
+void CCmdSystray::activated(QSystemTrayIcon::ActivationReason reason)
+{
+    if (reason == QSystemTrayIcon::Trigger)
+        m_menu->popup(QCursor::pos());
 }
 
 void CCmdSystray::changeContext()
