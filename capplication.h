@@ -32,6 +32,9 @@ public: // For Tasks:
 
     const QList<const CContext*> contexts() const { return m_contexts; }
 
+public: // For Commands:
+    const QString path() const;
+
 private:
     void readContexts();
 

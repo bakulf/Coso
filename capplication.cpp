@@ -55,6 +55,12 @@ int CApplication::run()
     return ret;
 }
 
+const QString CApplication::path() const
+{
+    QDir home(QDir::home());
+    return home.absoluteFilePath(C_PATH);
+}
+
 void CApplication::readContexts()
 {
     QDir home(QDir::home());

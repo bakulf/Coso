@@ -12,11 +12,14 @@
 #include "ccmd.h"
 
 #include <QSystemTrayIcon>
+#include <QPointer>
 
 class CApplication;
 class CContext;
 
+class QFileSystemWatcher;
 class QMenu;
+class QDir;
 
 // Systray
 class CCmdSystray : public CCmd
@@ -34,11 +37,21 @@ private Q_SLOTS:
     void changeContext();
     void activated(QSystemTrayIcon::ActivationReason reason);
 
+    void aboutToQuit();
+
+    void fileSystemChanged();
+
+private:
+    void watchPath();
+    void watchPath(const QDir &dir);
+
 private:
     CApplication *m_application;
 
-    QSystemTrayIcon *m_sysTray;
-    QMenu *m_menu;
+    QPointer<QSystemTrayIcon> m_sysTray;
+    QPointer<QMenu> m_menu;
+
+    QPointer<QFileSystemWatcher> m_watcher;
 
     CCMD_HELPER;
 };

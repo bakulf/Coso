@@ -13,8 +13,12 @@
 #include "ccontext.h"
 #include "ctask.h"
 
+#include <QDir>
 #include <QMenu>
 #include <QAction>
+#include <QFileSystemWatcher>
+
+#include <iostream>
 
 CCmd* CCmdSystray::helper(CApplication *application, const QStringList &arguments)
 {
@@ -31,7 +35,8 @@ CCmdSystray::CCmdSystray(CApplication *application) :
     CCmd(application),
     m_application(application),
     m_sysTray(new QSystemTrayIcon()),
-    m_menu(new QMenu())
+    m_menu(new QMenu()),
+    m_watcher(new QFileSystemWatcher())
 {
     m_sysTray->setIcon(QIcon(":/images/icon.png"));
 
@@ -59,10 +64,68 @@ CCmdSystray::CCmdSystray(CApplication *application) :
     connect(m_sysTray,
             SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
             SLOT(activated(QSystemTrayIcon::ActivationReason)));
+
+    connect(m_application,
+            SIGNAL(aboutToQuit()),
+            SLOT(aboutToQuit()));
+
+    connect(m_watcher,
+            SIGNAL(directoryChanged(QString)),
+            SLOT(fileSystemChanged()));
+    connect(m_watcher,
+            SIGNAL(fileChanged(QString)),
+            SLOT(fileSystemChanged()));
+
+    watchPath();
 }
 
 CCmdSystray::~CCmdSystray()
 {
+}
+
+void CCmdSystray::aboutToQuit()
+{
+    if (m_watcher) {
+        delete m_watcher;
+        m_watcher = 0;
+    }
+}
+
+// When something changes, let's restart:
+void CCmdSystray::fileSystemChanged()
+{
+    QStringList arguments(m_application->arguments());
+
+    const char **argv = (const char **)malloc(sizeof(char *) + (arguments.size() + 1));
+    int argc(0);
+    foreach(QString part, arguments) {
+        argv[argc++] = strdup(qPrintable(part));
+    }
+
+    if (execvp(argv[0], (char* const*)argv)) {
+        std::cerr << "Error executing the command `" << argv[0] << "'." << std::endl;
+    }
+
+    exit(0);
+}
+
+void CCmdSystray::watchPath()
+{
+    QString path(m_application->path());
+    m_watcher->addPath(path);
+
+    QDir home(path);
+    watchPath(home);
+}
+
+void CCmdSystray::watchPath(const QDir &dir)
+{
+    QFileInfoList list = dir.entryInfoList(QDir::AllDirs | QDir::Files | QDir::NoDotAndDotDot, QDir::NoSort);
+    foreach(const QFileInfo &info, list) {
+        m_watcher->addPath(info.absoluteFilePath());
+        if (info.isDir())
+            watchPath(QDir(info.absoluteFilePath()));
+    }
 }
 
 int CCmdSystray::run()
