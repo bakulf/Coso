@@ -26,7 +26,7 @@
 // List of the commands:
 CCmdHelper CCmdHelpers[] = {
     { "switch|sw [contextName] <--verbose|-v>", "change context",                         CCmdSwitch::helper  },
-    { "systray",                                "run as a systray app",                   CCmdSystray::helper },
+    { "systray|st",                             "run as a systray app",                   CCmdSystray::helper },
     { "info|i",                                 "show the configuration of the contexts", CCmdInfo::helper    },
     { "new|n <options>",                        "create a new context or a task",         CCmdNew::helper     },
     { "delete|d <options>",                     "delete a new context or a task",         CCmdDelete::helper  },
