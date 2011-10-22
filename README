@@ -17,6 +17,7 @@ The menu:
     
     List of commands:
      . switch|sw [contextName] <--verbose|-v>  change context
+     . systray|st                              run as a systray app
      . info|i                                  show the configuration of the contexts
      . new|n <options>                         create a new context or a task
      . delete|d <options>                      delete a new context or a task
@@ -98,5 +99,15 @@ Switch the contexts
 -------------------
 
     (user)$ coso switch home
+
+Systray
+-------
+
+I use coso in the systray. Just run coso in this way:
+
+    (user)$ coso systray
+
+and can change contexts with one click.
+
 
 Bye
