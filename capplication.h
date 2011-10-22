@@ -35,7 +35,6 @@ public: // For Tasks:
 public: // For Commands:
     const QString path() const;
 
-private:
     void readContexts();
 
 private:

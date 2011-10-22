@@ -63,6 +63,9 @@ const QString CApplication::path() const
 
 void CApplication::readContexts()
 {
+    qDeleteAll(m_contexts.begin(), m_contexts.end());
+    m_contexts.clear();
+
     QDir home(QDir::home());
     QFileInfo info(home.absoluteFilePath(C_PATH));
 

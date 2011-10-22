@@ -42,6 +42,8 @@ private Q_SLOTS:
     void fileSystemChanged();
 
 private:
+    void createMenu();
+
     void watchPath();
     void watchPath(const QDir &dir);
 

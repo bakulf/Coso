@@ -40,25 +40,7 @@ CCmdSystray::CCmdSystray(CApplication *application) :
 {
     m_sysTray->setIcon(QIcon(":/images/icon.png"));
 
-    foreach(const CContext *context, m_application->contexts()) {
-        QAction *action = new QAction(context->name(), this);
-        m_menu->addAction(action);
-        connect(action,
-                SIGNAL(triggered()),
-                SLOT(changeContext()));
-    }
-
-    m_menu->addSeparator();
-
-    {
-        QAction *quit = new QAction("Quit", this);
-        m_menu->addAction(quit);
-        connect(quit,
-                SIGNAL(triggered()),
-                m_application,
-                SLOT(quit()));
-    }
-
+    createMenu();
     m_sysTray->setContextMenu(m_menu);
 
     connect(m_sysTray,
@@ -94,25 +76,43 @@ void CCmdSystray::aboutToQuit()
 // When something changes, let's restart:
 void CCmdSystray::fileSystemChanged()
 {
-    QStringList arguments(m_application->arguments());
+    m_application->readContexts();
+    createMenu();
+    watchPath();
+}
 
-    const char **argv = (const char **)malloc(sizeof(char *) + (arguments.size() + 1));
-    int argc(0);
-    foreach(QString part, arguments) {
-        argv[argc++] = strdup(qPrintable(part));
+void CCmdSystray::createMenu()
+{
+    m_menu->clear();
+
+    foreach(const CContext *context, m_application->contexts()) {
+        QAction *action = new QAction(context->name(), this);
+        m_menu->addAction(action);
+        connect(action,
+                SIGNAL(triggered()),
+                SLOT(changeContext()));
     }
 
-    if (execvp(argv[0], (char* const*)argv)) {
-        std::cerr << "Error executing the command `" << argv[0] << "'." << std::endl;
+    m_menu->addSeparator();
+
+    {
+        QAction *quit = new QAction("Quit", this);
+        m_menu->addAction(quit);
+        connect(quit,
+                SIGNAL(triggered()),
+                m_application,
+                SLOT(quit()));
     }
 
-    exit(0);
 }
 
 void CCmdSystray::watchPath()
 {
     QString path(m_application->path());
-    m_watcher->addPath(path);
+
+    if (!m_watcher->files().contains(path) &&
+        !m_watcher->directories().contains(path))
+        m_watcher->addPath(path);
 
     QDir home(path);
     watchPath(home);
@@ -122,9 +122,14 @@ void CCmdSystray::watchPath(const QDir &dir)
 {
     QFileInfoList list = dir.entryInfoList(QDir::AllDirs | QDir::Files | QDir::NoDotAndDotDot, QDir::NoSort);
     foreach(const QFileInfo &info, list) {
-        m_watcher->addPath(info.absoluteFilePath());
+        QString path = info.absoluteFilePath();
+
+        if (!m_watcher->files().contains(path) &&
+            !m_watcher->directories().contains(path))
+            m_watcher->addPath(path);
+
         if (info.isDir())
-            watchPath(QDir(info.absoluteFilePath()));
+            watchPath(QDir(path));
     }
 }
 
