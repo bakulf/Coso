@@ -38,8 +38,6 @@ public: // For Commands:
     void readContexts();
 
 private:
-    QStringList m_arguments;
-
     QPointer<CContext> m_globalContext;
     QList<const CContext*> m_contexts;
 };

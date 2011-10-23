@@ -21,9 +21,6 @@
 CApplication::CApplication(int &argc, char **argv) :
     QApplication(argc, argv)
 {
-    // Get the list of args
-    m_arguments = arguments();
-
     // Parse the contexts list
     readContexts();
 }
@@ -36,15 +33,17 @@ CApplication::~CApplication()
 int CApplication::run()
 {
     int ret = 0;
+    QStringList args = arguments();
+
 
     // Removing argv[0]:
-    if (m_arguments.size())
-        m_arguments.removeFirst();
+    if (args.size())
+        args.removeFirst();
 
     // Let's find the best command and exec it:
     for (int i = 0; CCmdHelpers[i].name; i++)
     {
-        CCmd *cmd(CCmdHelpers[i].helper(this, m_arguments));
+        CCmd *cmd(CCmdHelpers[i].helper(this, args));
         if (cmd)
         {
             ret = cmd->run();
