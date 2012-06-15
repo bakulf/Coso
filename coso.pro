@@ -7,7 +7,7 @@ MOC_DIR     = .moc
 OBJECTS_DIR = .obj
 
 CONFIG    += link_pkgconfig
-PKGCONFIG += gconf-2.0
+PKGCONFIG += gconf-2.0 gio-2.0
 
 QMAKE_CXXFLAGS *= -Werror
 
@@ -24,6 +24,7 @@ INCLUDEPATH += tasks            \
                tasks/removeFile \
                tasks/createFile \
                tasks/gconf      \
+               tasks/gsettings  \
                tasks/kill       \
                tasks/exec       \
                tasks/subContext
@@ -48,6 +49,7 @@ TASKS_HEADERS = ctaskeditfile.h   \
                 ctaskremovefile.h \
                 ctaskcreatefile.h \
                 ctaskgconf.h      \
+                ctaskgsettings.h  \
                 ctaskkill.h       \
                 ctaskexec.h       \
                 ctasksubcontext.h
@@ -56,6 +58,7 @@ TASKS_SOURCES = ctaskeditfile.cpp   \
                 ctaskremovefile.cpp \
                 ctaskcreatefile.cpp \
                 ctaskgconf.cpp      \
+                ctaskgsettings.cpp  \
                 ctaskkill.cpp       \
                 ctaskexec.cpp       \
                 ctasksubcontext.cpp

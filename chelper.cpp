@@ -19,6 +19,7 @@
 #include "ctaskremovefile.h"
 #include "ctaskcreatefile.h"
 #include "ctaskgconf.h"
+#include "ctaskgsettings.h"
 #include "ctaskkill.h"
 #include "ctaskexec.h"
 #include "ctasksubcontext.h"
@@ -42,6 +43,7 @@ CTaskHelper CTaskHelpers[] = {
     { "removeFile", "Remove a file",                            CTaskRemoveFile::helper, CTaskRemoveFile::generator },
     { "createFile", "Create a file",                            CTaskCreateFile::helper, CTaskCreateFile::generator },
     { "gconf",      "Set values on some gconf key",             CTaskGConf::helper,      CTaskGConf::generator      },
+    { "gsettings",  "Set values on some gsettings schema/key",  CTaskGSettings::helper,  CTaskGSettings::generator  },
     { "kill",       "Kill a process",                           CTaskKill::helper,       CTaskKill::generator       },
     { "exec",       "Exec a process",                           CTaskExec::helper,       CTaskExec::generator       },
     { "subContext", "Run another context",                      CTaskSubContext::helper, CTaskSubContext::generator },

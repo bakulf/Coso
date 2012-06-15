@@ -40,6 +40,14 @@
 #define C_TASK_GCONF_VALUE_TAG "Value"
 #define C_TASK_GCONF_TYPE_ATTR "type"
 
+// GSettings Task -----------------------------------------------------------
+#define C_TASK_GSETTINGS_NAME       "gsettings"
+#define C_TASK_GSETTINGS_ENTRY_TAG  "Entry"
+#define C_TASK_GSETTINGS_SCHEMA_TAG "Schema"
+#define C_TASK_GSETTINGS_KEY_TAG    "Key"
+#define C_TASK_GSETTINGS_VALUE_TAG  "Value"
+#define C_TASK_GSETTINGS_TYPE_ATTR  "type"
+
 // Kill Task ----------------------------------------------------------------
 #define C_TASK_KILL_NAME             "kill"
 #define C_TASK_KILL_PROCESS_NAME_TAG "ProcessName"
@@ -108,6 +116,36 @@
     "  </Entry>\n" \
     "  <Entry>\n" \
     "    <Key>/a/key</Key>\n" \
+    "    <Value type=\"float\">123.43</Value>\n" \
+    "  </Entry>\n" \
+    "</CosoTask>\n"
+
+#define C_TASK_GSETTINGS_TEMPLATE \
+    "<CosoTask>\n" \
+    "  <Type>gsettings</Type>\n" \
+    "\n" \
+    "  <!-- this file is a template. Please, edit this part: -->\n" \
+    "\n" \
+    "  <!-- List of entries to be changed. The values types are:\n" \
+    "       boolean, integer, uinteger, double, string, enum, flags. -->\n" \
+    "  <Entry>\n" \
+    "    <Schema>org.gnome.system.proxy</Schema>\n" \
+    "    <Key>something</Key>\n" \
+    "    <Value type=\"string\">the value</Value>\n" \
+    "  </Entry>\n" \
+    "  <Entry>\n" \
+    "    <Schema>org.gnome.system.proxy</Schema>\n" \
+    "    <Key>something</Key>\n" \
+    "    <Value type=\"bool\">true</Value>\n" \
+    "  </Entry>\n" \
+    "  <Entry>\n" \
+    "    <Schema>org.gnome.system.proxy</Schema>\n" \
+    "    <Key>something</Key>\n" \
+    "    <Value type=\"integer\">123</Value>\n" \
+    "  </Entry>\n" \
+    "  <Entry>\n" \
+    "    <Schema>org.gnome.system.proxy</Schema>\n" \
+    "    <Key>something</Key>\n" \
     "    <Value type=\"float\">123.43</Value>\n" \
     "  </Entry>\n" \
     "</CosoTask>\n"

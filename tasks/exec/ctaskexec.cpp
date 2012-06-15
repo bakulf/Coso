@@ -84,10 +84,6 @@ int CTaskExec::run(const QString &context)
 
             case 0: // Child
             {
-                close(0);
-                close(1);
-                close(2);
-
                 const char **argv = (const char **)malloc(sizeof(char *) + (process.size() + 1));
 
                 int argc(0);
